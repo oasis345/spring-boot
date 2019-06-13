@@ -39,12 +39,13 @@
                 as.appendChild(temp);
         });
     }
-    return {init : init};
+    return {keykey : init};//hash 구조  key : value
     //{init : init}; 는 제이슨이다. 제이슨을 하려면 이파이 페턴을써야한다.
 
    
 })();*/
 
+/*
 var app = (function(){
 
     let init=function(){
@@ -52,10 +53,7 @@ var app = (function(){
     }
 
     let login_form = function(){
-        var wrapper = document.querySelector("#wrapper");
-        
-        
-
+        let wrapper = document.querySelector("#wrapper");
         wrapper.innerHTML=+'<form action="/action_page.php">'
         +'  First name:<br>'
         +'  <input type="text" name="firstname" value="Mickey">'
@@ -63,66 +61,82 @@ var app = (function(){
         +'  Last name:<br>'
         +'  <input type="text" name="lastname" value="Mouse">'
         +'  <br><br>'
-        +'  <input type="submit" value="Submit">'
-        +'  <input type="button" value="회원가입" id="join" >' 
+        +'  <input type="button" id="loginbtn" value="Login">'
+        +'  <input type="button" id="joinbtn" value="JOIN">'
         +'</form> ';
 
-      /*  wrapper.innerHTML ='<h1>spa시작</h1>'
-        + '<button id="btn2">추가하자</button>'
-        + '<div id="chae">삭제할내용</div>'
-        + '<button id="btn">지어버리자</button>';
-
-        */
-
-        var join = document.querySelector("#join");
-        join.addEventListener("click" , function(){
-            wrapper.innerHTML =
-        +'<form action="/action_page.php">'
-        +'  아이디:<br>'
-        +'  <input type="text" name="id" value="Mickey">'
+        let join_btn = document.querySelector("#joinbtn");
+        join_btn.addEventListener('click',function(){
+            join_form();
+        });
+        
+    }
+    let join_form =function(){
+        let wrapper = document.querySelector("#wrapper");
+        wrapper.innerHTML=+'<form action="/action_page.php">'
+        +'  아이디<br>'
+        +'  <input type="text" name="firstname" value="oasis345">'
         +'  <br>'
         +'  비밀번호:<br>'
-        +'  <input type="text" name="pw" value="Mouse">'
-        +'  <br>'
-        +'  이름:<br>'
-        +'  <input type="text" name="name" value="채형국">'
-        +'  <br>'
-        +'  성별:<br>'
-        +'  <input type="radio" name="gender"/checked>남자 <input type="radio" name = gender"/>여자'
-        +'  <br>'
-        +'  phone:<br>'
-        +'  <input type="text" name="id" value="Mickey">'
-        +'  <br>'
+        +'  <input type="text" name="lastname" value="1234">'
         +'  <br><br>'
-        +'  <input type="submit" value="Submit">'
-        +'  <input type="reset" value="초기화" >' 
+        +'  <input type="submit" id="join" value="가입하기">'
+        +'  <input type="reset" id="reet"value="초기화">'
         +'</form> ';
-        });
 
-
-        
-        var btn = document.querySelector("#btn");
-        var btn2 = document.querySelector("#btn2");
-        var add= document.querySelector("#add");
-        var as= document.querySelector('#as');
-        
-        
-        
-        add.addEventListener("click",function(){
-            as.innerHTML="hello world"
+        let join_btn = document.querySelector("#join");
+        join_btn.addEventListener('click',function(){
+            login_form();
         });
         
-        btn.addEventListener("click",function(){
-            as.innerHTML='';
-        });
-        
-        btn2.addEventListener("click",function(){
-                var temp = document.createTextNode('새로 추가됨');
-                as.appendChild(temp);
-        });
     }
-    return {init : init};
-    //{init : init}; 는 제이슨이다. 제이슨을 하려면 이파이 페턴을써야한다.
+return {init : init}; //{init : init}; 는 제이슨이다. 제이슨을 하려면 이파이 페턴을써야한다. 앞에 init은 그냥 명칭같은것
+})();
 
-   
+*/
+var app = (()=>{
+
+    let init=()=>{
+        login_form();   
+    }
+
+    let login_form = ()=>{
+        let wrapper = document.querySelector("#wrapper");
+        wrapper.innerHTML=+'<form action="/action_page.php">'
+        +'  First name:<br>'
+        +'  <input type="text" name="firstname" value="Mickey">'
+        +'  <br>'
+        +'  Last name:<br>'
+        +'  <input type="text" name="lastname" value="Mouse">'
+        +'  <br><br>'
+        +'  <input type="button" id="loginbtn" value="Login">'
+        +'  <input type="button" id="joinbtn" value="JOIN">'
+        +'</form> ';
+
+        let join_btn = document.querySelector("#joinbtn");
+        join_btn.addEventListener('click',()=>{
+            join_form();
+        });
+        
+    }
+    let join_form =()=>{
+        let wrapper = document.querySelector("#wrapper");
+        wrapper.innerHTML=+'<form action="/action_page.php">'
+        +'  아이디<br>'
+        +'  <input type="text" name="firstname" value="oasis345">'
+        +'  <br>'
+        +'  비밀번호:<br>'
+        +'  <input type="text" name="lastname" value="1234">'
+        +'  <br><br>'
+        +'  <input type="submit" id="join" value="가입하기">'
+        +'  <input type="reset" id="reet"value="초기화">'
+        +'</form> ';
+
+        let join_btn = document.querySelector("#join");
+        join_btn.addEventListener('click',()=>{
+            login_form();
+        });
+        
+    }
+return {init : init}; //{init : init}; 는 제이슨이다. 제이슨을 하려면 이파이 페턴을써야한다. 앞에 init은 그냥 명칭같은것
 })();
