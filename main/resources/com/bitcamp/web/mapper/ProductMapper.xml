@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitcamp.web.mapper.ProductMapper">
+
+    <insert id="insertProduct" parameterType="com.bitcamp.web.domain.ProductDTO">
+        insert into products(product_id, product_name, supplier_id, category_id, unit, price, photo) 
+        values(#{productId}, #{ProductName}, #{supplierId}, #{categoryId}, #{unit}, #{price}, #{photo});
+    </insert>
+
+    <select id="selectProducts" parameterType="com.bitcamp.web.domain.ProductDTO"
+     resultType="com.bitcamp.web.domain.ProductDTO">
+        select * from products
+    </select>
+
+    <select id="selectProductsByOption" parameterType="com.bitcamp.web.domain.ProductDTO"
+     resultType="com.bitcamp.web.domain.ProductDTO">
+        select * from products where product_name = #{productName}
+    </select>
+
+    <select id="selectProductByProductId" parameterType="string"
+     resultType="com.bitcamp.web.domain.ProductDTO">
+        select * from products where product_id = #{value}
+    </select>
+
+    <update id="updateProduct" parameterType="com.bitcamp.web.domain.ProductDTO">
+        update products set
+            product_name = #{productName},
+            supplier_id = #{supplierId},
+            category_id = #{categoryId},
+            unit = #{unit},
+            price = #{price},
+            photo = #{photo}
+        where product_id = #{productId}
+    </update>
+
+    <delete id="deleteProduct" parameterType="com.bitcamp.web.domain.ProductDTO">
+        delete from products where product_id = #{productId}
+    </delete>
+
+</mapper>

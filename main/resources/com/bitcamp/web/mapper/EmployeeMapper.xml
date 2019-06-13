@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitcamp.web.mapper.EmployeeMapper">
+
+    <insert id="insertEmployee" parameterType="com.bitcamp.web.domain.EmployeeDTO">
+        insert into employees(employee_id, manager, name, birth_date, photo, notes) 
+        values(#{employeeId},#{manager},#{name},#{birthDate},#{photo},#{notes});
+    </insert>
+
+    <select id="selectEmployees" parameterType="com.bitcamp.web.domain.EmployeeDTO"
+     resultType="com.bitcamp.web.domain.EmployeeDTO">
+        select * from employees
+    </select>
+
+    <select id="selectEmployeesByOption" parameterType="com.bitcamp.web.domain.EmployeeDTO"
+     resultType="com.bitcamp.web.domain.EmployeeDTO">
+        select * from employees where manager = #{manager}
+    </select>
+
+    <select id="selectEmployeeByEmployeeId" parameterType="string"
+     resultType="com.bitcamp.web.domain.EmployeeDTO">
+        select * from employees where employee_id = #{value}
+    </select>
+
+    <update id="updateEmployee" parameterType="com.bitcamp.web.domain.EmployeeDTO">
+        update employees set
+            manager = #{manager},
+            name = #{name},
+            birth_date = #{birthDate},
+            photo = #{photo},
+            notes = #{notes}
+        where employee_id = #{employeeId}
+    </update>
+
+    <delete id="deleteEmployee" parameterType="com.bitcamp.web.domain.EmployeeDTO">
+        delete from employees where employee_id = #{employeeId}
+    </delete>
+
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitcamp.web.mapper.ShipperMapper">
+
+    <insert id="insertShipper" parameterType="com.bitcamp.web.domain.ShipperDTO">
+        insert into shippers(shipper_id, shipper_name, phone) 
+        values(#{shipperId}, #{shipperName}, #{phone});
+    </insert>
+
+    <select id="selectShippers" parameterType="com.bitcamp.web.domain.ShipperDTO"
+     resultType="com.bitcamp.web.domain.ShipperDTO">
+        select * from shippers
+    </select>
+
+    <select id="selectShippersByOption" parameterType="com.bitcamp.web.domain.ShipperDTO"
+     resultType="com.bitcamp.web.domain.ShipperDTO">
+        select * from shippers where shipper_name = #{shipperName}
+    </select>
+
+    <select id="selectShipperByShipperId" parameterType="string"
+     resultType="com.bitcamp.web.domain.ShipperDTO">
+        select * from shippers where shipper_id = #{value}
+    </select>
+
+    <update id="updateShipper" parameterType="com.bitcamp.web.domain.ShipperDTO">
+        update shippers set
+            shipper_name = #{shipperName},
+            phone = #{phone}
+        where shipper_id = #{shipperId}
+    </update>
+
+    <delete id="deleteShipper" parameterType="com.bitcamp.web.domain.ShipperDTO">
+        delete from shippers where shipper_id = #{shipperId}
+    </delete>
+
+</mapper>

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Data @Component @Lazy
-public class EmployeeDTO {
-    private String employeeId, manager, name, birth_date, photo, notes;
+public class CategoryDTO {
+    private String categoryId, categoryName, description;
 }
+
