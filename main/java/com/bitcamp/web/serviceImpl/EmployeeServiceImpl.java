@@ -6,9 +6,6 @@ import com.bitcamp.web.domain.EmployeeDTO;
 import com.bitcamp.web.service.EmployeeService;
 import org.springframework.stereotype.Service;
 
-/**
- * EmployeeServiceImpl
- */
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
 
@@ -23,12 +20,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public List<EmployeeDTO> findEmployeesByOption(EmployeeDTO option) {
+    public List<EmployeeDTO> findEmployeesByOption(String employeeManager) {
         return null;
     }
 
     @Override
-    public EmployeeDTO findEmployeeByEmployeeId(String EmployeeId) {
+    public EmployeeDTO findEmployeeByEmployeeId(String employeeId) {
         return null;
     }
 
@@ -38,7 +35,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public void deleteEmployee(EmployeeDTO employee) {
+    public void deleteEmployee(String employeeId) {
 
     }
 

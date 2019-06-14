@@ -6,34 +6,34 @@
 <mapper namespace="com.bitcamp.web.mapper.ShipperMapper">
 
     <insert id="insertShipper" parameterType="com.bitcamp.web.domain.ShipperDTO">
-        insert into shippers(shipper_id, shipper_name, phone) 
-        values(#{shipperId}, #{shipperName}, #{phone});
+        INSERT INTO SHIPPERS VALUES(
+            #{shipper_Id},
+            #{shipper_Name},
+            #{phone}
+        )
     </insert>
 
-    <select id="selectShippers" parameterType="com.bitcamp.web.domain.ShipperDTO"
-     resultType="com.bitcamp.web.domain.ShipperDTO">
-        select * from shippers
+    <select id="selectShippers" resultType="com.bitcamp.web.domain.ShipperDTO">
+        SELECT * FROM SHIPPERS
     </select>
 
-    <select id="selectShippersByOption" parameterType="com.bitcamp.web.domain.ShipperDTO"
-     resultType="com.bitcamp.web.domain.ShipperDTO">
-        select * from shippers where shipper_name = #{shipperName}
+    <select id="selectShippersByOption" parameterType="string" resultType="com.bitcamp.web.domain.ShipperDTO">
+        SELECT * FROM SHIPPERS WHERE SHIPPER_NAME = #{shipper_Name}
     </select>
 
-    <select id="selectShipperByShipperId" parameterType="string"
-     resultType="com.bitcamp.web.domain.ShipperDTO">
-        select * from shippers where shipper_id = #{value}
+    <select id="selectShipperByShipperId" parameterType="string" resultType="com.bitcamp.web.domain.ShipperDTO">
+        SELECT * FROM SHIPPERS WHERE SHIPPER_ID = #{shipper_Id}
     </select>
 
     <update id="updateShipper" parameterType="com.bitcamp.web.domain.ShipperDTO">
-        update shippers set
-            shipper_name = #{shipperName},
-            phone = #{phone}
-        where shipper_id = #{shipperId}
+        UPDATE SHIPPERS SET
+            SHIPPER_NAME = #{shipper_Name},
+            PHONE = #{phone}
+        WHERE SHIPPER_ID = #{shipper_Id}
     </update>
 
-    <delete id="deleteShipper" parameterType="com.bitcamp.web.domain.ShipperDTO">
-        delete from shippers where shipper_id = #{shipperId}
+    <delete id="deleteShipper" parameterType="string">
+        DELETE FROM SHIPPERS WHERE SHIPPER_ID = #{shipper_Id}
     </delete>
 
 </mapper>

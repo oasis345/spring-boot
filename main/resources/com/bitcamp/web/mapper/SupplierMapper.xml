@@ -6,39 +6,44 @@
 <mapper namespace="com.bitcamp.web.mapper.SupplierMapper">
 
     <insert id="insertSupplier" parameterType="com.bitcamp.web.domain.SupplierDTO">
-        insert into suppliers(supplier_id, supplier_name, contact_name, address, city, postal_code, country, phone) 
-        values(#{supplierId}, #{supplierName}, #{contactName}, #{address}, #{city}, #{postalCode}, #{country}, #{phone});
+        insert into suppliers values(
+            #{supplier_Id},
+            #{supplier_Name},
+            #{contact_Name},
+            #{address},
+            #{city},
+            #{postal_Code},
+            #{country},
+            #{phone}
+        )
     </insert>
 
-    <select id="selectSuppliers" parameterType="com.bitcamp.web.domain.SupplierDTO"
-     resultType="com.bitcamp.web.domain.SupplierDTO">
-        select * from suppliers
+    <select id="selectSuppliers" resultType="com.bitcamp.web.domain.SupplierDTO">
+        SELECT * FROM SUPPLIERS
     </select>
 
-    <select id="selectSuppliersByOption" parameterType="com.bitcamp.web.domain.SupplierDTO"
-     resultType="com.bitcamp.web.domain.SupplierDTO">
-        select * from suppliers where supplier_name = #{supplierName}
+    <select id="selectSuppliersByOption" parameterType="string" resultType="com.bitcamp.web.domain.SupplierDTO">
+        SELECT * FROM SUPPLIERS WHERE SUPPLIER_NAME = #{supplier_Name}
     </select>
 
-    <select id="selectSupplierBySupplierId" parameterType="string"
-     resultType="com.bitcamp.web.domain.SupplierDTO">
-        select * from suppliers where supplier_id = #{value}
+    <select id="selectSupplierBySupplierId" parameterType="string" resultType="com.bitcamp.web.domain.SupplierDTO">
+        SELECT * FROM SUPPLIERS WHERE SUPPLIER_ID = #{supplier_Id}
     </select>
 
     <update id="updateSupplier" parameterType="com.bitcamp.web.domain.SupplierDTO">
-        update suppliers set
-            supplier_name = #{supplierName},
-            contact_name = #{contactName},
-            address = #{address},
-            city = #{city},
-            postal_code = #{postalCode},
-            country = #{country},
-            phone = #{phone}
-        where supplier_id = #{supplierId}
+        UPDATE SUPPLIERS SET
+            SUPPLIER_NAME = #{supplier_Name},
+            CONTACT_NAME = #{contact_Name},
+            ADDRESS = #{address},
+            CITY = #{city},
+            POSTAL_CODE = #{postal_Code},
+            COUNTRY = #{country},
+            PHONE = #{phone}
+        WHERE SUPPLIER_ID = #{supplierId}
     </update>
 
-    <delete id="deleteSupplier" parameterType="com.bitcamp.web.domain.SupplierDTO">
-        delete from suppliers where supplier_id = #{supplierId}
+    <delete id="deleteSupplier" parameterType="string">
+        DELETE FROM SUPPLIERS WHERE SUPPLIER_ID = #{supplier_Id}
     </delete>
 
 </mapper>

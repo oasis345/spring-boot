@@ -7,9 +7,6 @@ import com.bitcamp.web.service.ShipperService;
 
 import org.springframework.stereotype.Service;
 
-/**
- * ShipperServiceImpl
- */
 @Service
 public class ShipperServiceImpl implements ShipperService {
 
@@ -24,7 +21,7 @@ public class ShipperServiceImpl implements ShipperService {
     }
 
     @Override
-    public List<ShipperDTO> findShippersByOption(ShipperDTO option) {
+    public List<ShipperDTO> findShippersByOption(String shipperName) {
         return null;
     }
 
@@ -39,7 +36,7 @@ public class ShipperServiceImpl implements ShipperService {
     }
 
     @Override
-    public void deleteShipper(ShipperDTO shipper) {
+    public void deleteShipper(String shipperId) {
 
     }
 

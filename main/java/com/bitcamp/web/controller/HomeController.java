@@ -1,14 +1,35 @@
 package com.bitcamp.web.controller;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
 
-@RestController
+import com.bitcamp.web.domain.CustomerDTO;
+import com.bitcamp.web.serviceImpl.CustomerServiceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
 public class HomeController {
+
+    @Autowired
+    CustomerServiceImpl customerService;
 
     @RequestMapping("/")
     public String index() {
-        System.out.println("루트 URL 경로로 들어옴");
+
+        List<CustomerDTO> test = customerService.findCustomers();
+
+        for (int i = 0; i < test.size(); i++){
+            System.out.println(test.get(i).customer_Name());
+        }
+
+        System.out.println("------------------------------------");
+         for (CustomerDTO p : customerService.findCustomers()){
+           System.out.println(p.customer_Name());
+        }
+
         return "index";
     }
+
 }

@@ -6,40 +6,46 @@
 <mapper namespace="com.bitcamp.web.mapper.CustomerMapper">
 
     <insert id="insertCustomer" parameterType="com.bitcamp.web.domain.CustomerDTO">
-        insert into customers(customer_id, customer_name, password, ssn, phone, city, address, postalcode, photo) 
-        values(#{customerId},#{customerName},#{password},#{ssn},#{phone},#{city},#{address},#{postalcode},#{photo});
+        INSERT INTO CUSTOMERS VALUES(
+            #{customer_Id},
+            #{customer_Name},
+            #{password},
+            #{ssn},
+            #{phone},
+            #{city},
+            #{address},
+            #{postalcode},
+            #{photo}
+        )
     </insert>
 
-    <select id="selectCustomers" parameterType="com.bitcamp.web.domain.CustomerDTO"
-     resultType="com.bitcamp.web.domain.CustomerDTO">
-        select * from customers
+    <select id="selectCustomers" resultType="com.bitcamp.web.domain.CustomerDTO">
+        SELECT * FROM CUSTOMERS
     </select>
 
-    <select id="selectCustomersByOption" parameterType="com.bitcamp.web.domain.CustomerDTO"
-     resultType="com.bitcamp.web.domain.CustomerDTO">
-        select * from customers where customer_name = #{customerName}
+    <select id="selectCustomersByOption" parameterType="string" resultType="com.bitcamp.web.domain.CustomerDTO">
+        SELECT * FROM CUSTOMERS WHERE CUSTOMER_NAME = #{customer_Name}
     </select>
 
-    <select id="selectCustomerByCustomerId" parameterType="string"
-     resultType="com.bitcamp.web.domain.CustomerDTO">
-        select * from customers where customer_id = #{value}
+    <select id="selectCustomerByCustomerId" parameterType="string" resultType="com.bitcamp.web.domain.CustomerDTO">
+        SELECT * FROM CUSTOMERS WHERE CUSTOMER_ID = #{customer_Id}
     </select>
 
     <update id="updateCustomer" parameterType="com.bitcamp.web.domain.CustomerDTO">
-        update customers set
-            customer_name = #{customerName},
-            password = #{password},
-            ssn = #{ssn},
-            phone = #{phone},
-            city = #{city},
-            address = #{address},
-            postalcode = #{postalcode},
-            photo = #{photo}
-        where customer_id = #{customerId}
+        UPDATE CUSTOMERS SET
+            CUSTOMER_NAME = #{customer_Name},
+            PASSWORD = #{password},
+            SSN = #{ssn},
+            PHONE = #{phone},
+            CITY = #{city},
+            ADDRESS = #{address},
+            POSTALCODE = #{postalcode},
+            PHOTO = #{photo}
+        WHERE CUSTOMER_ID = #{customer_Id}
     </update>
 
-    <delete id="deleteCustomer" parameterType="com.bitcamp.web.domain.CustomerDTO">
-        delete from customers where customer_id = #{customerId}
+    <delete id="deleteCustomer" parameterType="string">
+        DELETE FROM CUSTOMERS WHERE CUSTOMER_ID = #{customer_Id}
     </delete>
 
 </mapper>

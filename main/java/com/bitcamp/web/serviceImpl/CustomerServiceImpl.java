@@ -3,14 +3,17 @@ package com.bitcamp.web.serviceImpl;
 import java.util.List;
 
 import com.bitcamp.web.domain.CustomerDTO;
+import com.bitcamp.web.mapper.CustomerMapper;
 import com.bitcamp.web.service.CustomerService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * CustomerServiceImpl
- */
 @Service
 public class CustomerServiceImpl implements CustomerService {
+
+    @Autowired
+    CustomerMapper customerMapper;
 
     @Override
     public void addCustomer(CustomerDTO customer) {
@@ -19,11 +22,11 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public List<CustomerDTO> findCustomers() {
-        return null;
+        return customerMapper.selectCustomers();
     }
 
     @Override
-    public List<CustomerDTO> findCustomersByOption(CustomerDTO option) {
+    public List<CustomerDTO> findCustomersByOption(String customerName) {
         return null;
     }
 
@@ -38,8 +41,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public void deleteCustomer(CustomerDTO customer) {
+    public void deleteCustomer(String customerId) {
 
     }
+
 
 }

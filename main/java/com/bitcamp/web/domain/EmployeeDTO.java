@@ -7,5 +7,10 @@ import lombok.Data;
 
 @Data @Component @Lazy
 public class EmployeeDTO {
-    private String employeeId, manager, name, birth_date, photo, notes;
+    private int employee_Id;
+    private String manager;
+    private String name;
+    private String birthDate;
+    private String photo;
+    private String notes;
 }

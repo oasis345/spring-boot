@@ -6,17 +6,13 @@ import com.bitcamp.web.domain.CategoryDTO;
 
 import org.springframework.stereotype.Component;
 
-/**
- * CategoryService
- */
-
 @Component
 public interface CategoryService {
 
     public void addCategory(CategoryDTO category);
     public List<CategoryDTO> findCategories();
-    public List<CategoryDTO> findCategoriesByOption(CategoryDTO category);
-    public CategoryDTO FindCategoryByCategoryId(String category);
+    public List<CategoryDTO> findCategoriesByOption(String categoryName);
+    public CategoryDTO FindCategoryByCategoryId(String categoryId);
     public void updateCategory(CategoryDTO category);
-    public void deleteCategory(CategoryDTO category);
+    public void deleteCategory(String categoryId);
 }

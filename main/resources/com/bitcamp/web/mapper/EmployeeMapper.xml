@@ -6,37 +6,40 @@
 <mapper namespace="com.bitcamp.web.mapper.EmployeeMapper">
 
     <insert id="insertEmployee" parameterType="com.bitcamp.web.domain.EmployeeDTO">
-        insert into employees(employee_id, manager, name, birth_date, photo, notes) 
-        values(#{employeeId},#{manager},#{name},#{birthDate},#{photo},#{notes});
+        INSERT INTO EMPLOYEES VALUES(
+            #{employee_Id},
+            #{manager},
+            #{name},
+            #{birthDate},
+            #{photo},
+            #{notes}
+        )
     </insert>
 
-    <select id="selectEmployees" parameterType="com.bitcamp.web.domain.EmployeeDTO"
-     resultType="com.bitcamp.web.domain.EmployeeDTO">
-        select * from employees
+    <select id="selectEmployees" resultType="com.bitcamp.web.domain.EmployeeDTO">
+        SELECT * FROM EMPLOYEES
     </select>
 
-    <select id="selectEmployeesByOption" parameterType="com.bitcamp.web.domain.EmployeeDTO"
-     resultType="com.bitcamp.web.domain.EmployeeDTO">
-        select * from employees where manager = #{manager}
+    <select id="selectEmployeesByOption" parameterType="string" resultType="com.bitcamp.web.domain.EmployeeDTO">
+        SELECT * FROM EMPLOYEES WHERE MANAGER = #{employee_Manager}
     </select>
 
-    <select id="selectEmployeeByEmployeeId" parameterType="string"
-     resultType="com.bitcamp.web.domain.EmployeeDTO">
-        select * from employees where employee_id = #{value}
+    <select id="selectEmployeeByEmployeeId" parameterType="string" resultType="com.bitcamp.web.domain.EmployeeDTO">
+        SELECT * FROM EMPLOYEES WHERE EMPLOYEE_ID = #{employee_Id}
     </select>
 
     <update id="updateEmployee" parameterType="com.bitcamp.web.domain.EmployeeDTO">
-        update employees set
+        UPDATE EMPLOYEES SET
             manager = #{manager},
             name = #{name},
             birth_date = #{birthDate},
             photo = #{photo},
             notes = #{notes}
-        where employee_id = #{employeeId}
+        WHERE EMPLOYEE_ID = #{employee_Id}
     </update>
 
-    <delete id="deleteEmployee" parameterType="com.bitcamp.web.domain.EmployeeDTO">
-        delete from employees where employee_id = #{employeeId}
+    <delete id="deleteEmployee" parameterType="string">
+        DELETE FROM EMPLOYEES WHERE EMPLOYEE_ID = #{employee_Id}
     </delete>
 
 </mapper>

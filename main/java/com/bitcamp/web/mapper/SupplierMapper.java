@@ -4,18 +4,16 @@ import java.util.List;
 
 import com.bitcamp.web.domain.SupplierDTO;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-/**
- * SupplierMapper
- */
+@Mapper
 @Repository
 public interface SupplierMapper {
-
     public void insertSupplier(SupplierDTO supplier);
     public List<SupplierDTO> selectSuppliers();
-    public List<SupplierDTO> selectSuppliersByOption(SupplierDTO option);
-    public SupplierDTO selectSupplierBySupplierId(String supplierId);
+    public List<SupplierDTO> selectSuppliersByOption(String supplier_Name);
+    public SupplierDTO selectSupplierBySupplierId(String supplier_Id);
     public void updateSupplier(SupplierDTO supplier);
-    public void deleteSupplier(SupplierDTO supplier);
+    public void deleteSupplier(String supplier_Id);
 }

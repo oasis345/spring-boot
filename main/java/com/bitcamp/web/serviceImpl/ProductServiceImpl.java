@@ -7,9 +7,6 @@ import com.bitcamp.web.service.ProductService;
 
 import org.springframework.stereotype.Service;
 
-/**
- * ProductServiceImpl
- */
 @Service
 public class ProductServiceImpl implements ProductService {
 
@@ -24,7 +21,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<ProductDTO> findProductsByOption(ProductDTO option) {
+    public List<ProductDTO> findProductsByOption(String productName) {
         return null;
     }
 
@@ -39,7 +36,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void deleteProduct(ProductDTO product) {
+    public void deleteProduct(String productId) {
 
     }
 

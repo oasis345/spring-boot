@@ -6,38 +6,40 @@
 <mapper namespace="com.bitcamp.web.mapper.ProductMapper">
 
     <insert id="insertProduct" parameterType="com.bitcamp.web.domain.ProductDTO">
-        insert into products(product_id, product_name, supplier_id, category_id, unit, price, photo) 
-        values(#{productId}, #{ProductName}, #{supplierId}, #{categoryId}, #{unit}, #{price}, #{photo});
+        INSERT INTO PRODUCTS VALUES(
+            #{product_Id},
+            #{Product_Name},
+            #{supplier_Id},
+            #{category_Id},
+            #{unit},
+            #{price},
+            #{photo}
+        )
     </insert>
 
-    <select id="selectProducts" parameterType="com.bitcamp.web.domain.ProductDTO"
-     resultType="com.bitcamp.web.domain.ProductDTO">
-        select * from products
+    <select id="selectProducts" resultType="com.bitcamp.web.domain.ProductDTO">
+        SELECT * FROM PRODUCTS
     </select>
 
-    <select id="selectProductsByOption" parameterType="com.bitcamp.web.domain.ProductDTO"
-     resultType="com.bitcamp.web.domain.ProductDTO">
-        select * from products where product_name = #{productName}
+    <select id="selectProductsByOption" parameterType="string" resultType="com.bitcamp.web.domain.ProductDTO">
+        SELECT * FROM PRODUCTS WHERE PRODUCT_NAME = #{product_Name}
     </select>
 
-    <select id="selectProductByProductId" parameterType="string"
-     resultType="com.bitcamp.web.domain.ProductDTO">
-        select * from products where product_id = #{value}
+    <select id="selectProductByProductId" parameterType="string" resultType="com.bitcamp.web.domain.ProductDTO">
+        SELECT * FROM PRODUCTS WHERE PRODUCT_ID = #{product_Id}
     </select>
 
     <update id="updateProduct" parameterType="com.bitcamp.web.domain.ProductDTO">
-        update products set
-            product_name = #{productName},
-            supplier_id = #{supplierId},
-            category_id = #{categoryId},
-            unit = #{unit},
-            price = #{price},
-            photo = #{photo}
-        where product_id = #{productId}
+        UPDATE PRODUCTS SET
+            PRODUCT_NAME = #{Product_Name},
+            UNIT = #{unit},
+            PRICE = #{price},
+            PHOTO = #{photo}
+        WHERE PRODUCT_ID = #{product_Id}
     </update>
 
-    <delete id="deleteProduct" parameterType="com.bitcamp.web.domain.ProductDTO">
-        delete from products where product_id = #{productId}
+    <delete id="deleteProduct" parameterType="string">
+        DELETE FROM PRODUCTS WHERE PRODUCT_ID = #{product_Id}
     </delete>
 
 </mapper>

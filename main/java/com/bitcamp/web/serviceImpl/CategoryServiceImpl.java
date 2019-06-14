@@ -6,9 +6,6 @@ import com.bitcamp.web.domain.CategoryDTO;
 import com.bitcamp.web.service.CategoryService;
 import org.springframework.stereotype.Service;
 
-/**
- * CategoryServiceImpl
- */
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
@@ -23,12 +20,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public List<CategoryDTO> findCategoriesByOption(CategoryDTO category) {
+    public List<CategoryDTO> findCategoriesByOption(String categoryName) {
         return null;
     }
 
     @Override
-    public CategoryDTO FindCategoryByCategoryId(String category) {
+    public CategoryDTO FindCategoryByCategoryId(String categoryId) {
         return null;
     }
 
@@ -38,8 +35,9 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteCategory(CategoryDTO category) {
+    public void deleteCategory(String categoryId) {
 
     }
+
 
 }

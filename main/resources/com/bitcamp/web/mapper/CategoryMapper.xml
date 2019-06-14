@@ -3,36 +3,43 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!-- <resultMap id="categoryMap" type="com.bitcamp.web.domain.CategoryDTO">
+       <id property="categoryId" colmn="CATEGORY_ID">
+       <result property="categoryName" colmn="CATEOGRY_NAME">
+       <result property="description" colmn="DESCRIPTION">
+</resultMap> -->
+
 <mapper namespace="com.bitcamp.web.mapper.CategoryMapper">
 
     <insert id="insertCategory" parameterType="com.bitcamp.web.domain.CategoryDTO">
-        INSERT INTO CATEGORIES(CATEGORY_ID,CATEGORY_NAME,DESCRIPTION) VALUES(#{categoryId},#{categoryName},#{description});
+        INSERT INTO CATEGORIES VALUES(
+            #{category_Id},
+            #{category_Name},
+            #{description}
+        )
     </insert>
 
-    <select id="selectCategories" parameterType="com.bitcamp.web.domain.CategoryDTO"
-     resultType="com.bitcamp.web.domain.CategoryDTO">
-        select * from categories
+    <select id="selectCategories" resultType="com.bitcamp.web.domain.CategoryDTO">
+        SELECT * FROM CATEGORIES
     </select>
 
-    <select id="selectCategoriesByOption" parameterType="com.bitcamp.web.domain.CategoryDTO"
-     resultType="com.bitcamp.web.domain.CategoryDTO">
-        select * from categories where category_name = #{categoryName}
+    <select id="selectCategoriesByOption" parameterType="string" resultType="com.bitcamp.web.domain.CategoryDTO">
+        SELECT * FROM CATEGORIES WHERE CATEGORY_NAME = #{category_Name}
     </select>
 
-    <select id="selectCategoryByCategoryId" parameterType="string"
-     resultType="com.bitcamp.web.domain.CategoryDTO">
-        select * from categories where category_id = #{value}
+    <select id="selectCategoryByCategoryId" parameterType="string" resultType="com.bitcamp.web.domain.CategoryDTO">
+        SELECT * FROM CATEGORIES WHERE CATEGORY_ID = #{category_Id}
     </select>
 
     <update id="updateCategory" parameterType="com.bitcamp.web.domain.CategoryDTO">
-        update categories set
-            category_name = #{categoryName},
-            description = #{description}
-        where category_id = #{categoryId}
+        UPDATE CATEGORIES SET
+            CATEGORY_NAME = #{category_Name},
+            DESCRIPTION = #{description}
+        WHERE CATEGORY_ID = #{category_Id}
     </update>
 
-    <delete id="deleteCategory" parameterType="com.bitcamp.web.domain.CategoryDTO">
-        delete from categories where category_id = #{categoryId}
+    <delete id="deleteCategory" parameterType="string">
+        DELETE FROM CATEGORIES WHERE CATEGORY_ID = #{category_Id}
     </delete>
 
 </mapper>

@@ -6,16 +6,13 @@ import com.bitcamp.web.domain.ProductDTO;
 
 import org.springframework.stereotype.Component;
 
-/**
- * ProductService
- */
 @Component
 public interface ProductService {
 
     public void addProduct(ProductDTO product);
     public List<ProductDTO> findProducts();
-    public List<ProductDTO> findProductsByOption(ProductDTO option);
+    public List<ProductDTO> findProductsByOption(String productName);
     public ProductDTO findProductByProductId(String productId);
     public void updateProduct(ProductDTO product);
-    public void deleteProduct(ProductDTO product);
+    public void deleteProduct(String productId);
 }

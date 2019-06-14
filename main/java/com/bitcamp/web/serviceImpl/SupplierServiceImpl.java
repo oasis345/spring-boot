@@ -7,9 +7,6 @@ import com.bitcamp.web.service.SupplierService;
 
 import org.springframework.stereotype.Service;
 
-/**
- * SupplierServiceImpl
- */
 @Service
 public class SupplierServiceImpl implements SupplierService {
 
@@ -24,7 +21,7 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public List<SupplierDTO> findSuppliersByOption(SupplierDTO option) {
+    public List<SupplierDTO> findSuppliersByOption(String supplierName) {
         return null;
     }
 
@@ -39,7 +36,7 @@ public class SupplierServiceImpl implements SupplierService {
     }
 
     @Override
-    public void deleteSupplier(SupplierDTO supplier) {
+    public void deleteSupplier(String supplierId) {
 
     }
 

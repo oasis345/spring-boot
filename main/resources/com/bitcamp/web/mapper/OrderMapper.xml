@@ -6,36 +6,35 @@
 <mapper namespace="com.bitcamp.web.mapper.OrderMapper">
 
     <insert id="insertOrder" parameterType="com.bitcamp.web.domain.OrderDTO">
-        insert into orders(order_id, customer_id, employee_id, order_date, shipper_id) 
-        values(#{orderId}, #{customerId}, #{employeeId}, #{orderDate}, #{shipperId});
+        INSERT INTO ORDERS VALUES(
+            #{order_Id},
+            #{customer_Id},
+            #{employee_Id},
+            #{order_Date},
+            #{shipper_Id}
+        )
     </insert>
 
-    <select id="selectOrders" parameterType="com.bitcamp.web.domain.OrderDTO"
-     resultType="com.bitcamp.web.domain.OrderDTO">
-        select * from orders
+    <select id="selectOrders" resultType="com.bitcamp.web.domain.OrderDTO">
+        SELECT * FROM ORDERS
     </select>
 
-    <select id="selectOrdersByOption" parameterType="com.bitcamp.web.domain.OrderDTO"
-     resultType="com.bitcamp.web.domain.OrderDTO">
-        select * from orders where customer_id = #{customerId}
+    <select id="selectOrdersByOption" parameterType="string" resultType="com.bitcamp.web.domain.OrderDTO">
+        SELECT * FROM ORDERS WHERE ORDER_DATE = #{orde_Date}
     </select>
 
-    <select id="selectOrderByOrderId" parameterType="string"
-     resultType="com.bitcamp.web.domain.OrderDTO">
-        select * from orders where order_id = #{value}
+    <select id="selectOrderByOrderId" parameterType="string" resultType="com.bitcamp.web.domain.OrderDTO">
+        SELECT * FROM ORDERS WHERE ORDER_ID = #{order_Id}
     </select>
 
     <update id="updateOrder" parameterType="com.bitcamp.web.domain.OrderDTO">
-        update orders set
-            customer_id = #{customerId},
-            employee_id = #{employeeId},
-            order_date = #{orderDate},
-            shipper_id = #{shipperId}
-        where order_id = #{orderId}
+        UPDATE ORDERS SET
+            ORDER_DATE = #{order_Date},
+        WHERE ORDER_ID = #{order_id}
     </update>
 
-    <delete id="deleteOrder" parameterType="com.bitcamp.web.domain.OrderDTO">
-        delete from orders where order_id = #{orderId}
+    <delete id="deleteOrder" parameterType="string">
+        DELETE FROM ORDERS WHERE ORDER_ID = #{order_Id}
     </delete>
 
 </mapper>

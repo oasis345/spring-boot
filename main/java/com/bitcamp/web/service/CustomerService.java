@@ -6,16 +6,13 @@ import com.bitcamp.web.domain.CustomerDTO;
 
 import org.springframework.stereotype.Component;
 
-/**
- * CustomerService
- */
 @Component
 public interface CustomerService {
 
     public void addCustomer(CustomerDTO customer);
     public List<CustomerDTO> findCustomers();
-    public List<CustomerDTO> findCustomersByOption(CustomerDTO option);
+    public List<CustomerDTO> findCustomersByOption(String customerName);
     public CustomerDTO findCustomerByCustomerId(String customerId);
     public void updateCustomer(CustomerDTO customer);
-    public void deleteCustomer(CustomerDTO customer);
+    public void deleteCustomer(String customerId);
 }

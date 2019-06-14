@@ -7,9 +7,6 @@ import com.bitcamp.web.service.OrderService;
 
 import org.springframework.stereotype.Service;
 
-/**
- * OrderServiceImple
- */
 @Service
 public class OrderServiceImple implements OrderService {
 
@@ -24,7 +21,7 @@ public class OrderServiceImple implements OrderService {
     }
 
     @Override
-    public List<OrderDTO> findOrdersByOption(OrderDTO option) {
+    public List<OrderDTO> findOrdersByOption(String ordeDate) {
         return null;
     }
 
@@ -39,7 +36,7 @@ public class OrderServiceImple implements OrderService {
     }
 
     @Override
-    public void deleteOrder(OrderDTO order) {
+    public void deleteOrder(String orderId) {
 
     }
 
