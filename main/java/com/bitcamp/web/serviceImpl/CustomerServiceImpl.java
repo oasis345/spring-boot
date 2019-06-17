@@ -45,5 +45,20 @@ public class CustomerServiceImpl implements CustomerService {
 
     }
 
+    @Override
+    public CustomerDTO login(CustomerDTO customer) {
+        System.out.println("컨틀ㄹ러에서 넘어온 아이디" + customer.getCustomer_Id());
+        System.out.println("컨틀ㄹ러에서 넘어온 아이디" + customer.getPassword());
+    
+        return customerMapper.login(customer); 
+           
+        
+    }
+
+    @Override
+    public int countAll() {
+        return customerMapper.countAll();
+    }
+
 
 }

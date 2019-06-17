@@ -8,7 +8,6 @@ import lombok.Data;
 @Data @Component @Lazy
 public class CategoryDTO {
     private int category_Id;
-    private String category_Name;
-    private String description;
+    private String category_Name,description;
 }
 

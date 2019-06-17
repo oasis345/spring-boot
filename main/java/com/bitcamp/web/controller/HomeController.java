@@ -18,7 +18,7 @@ public class HomeController {
     @RequestMapping("/")
     public String index() {
 
-        List<CustomerDTO> test = customerService.findCustomers();
+        /*List<CustomerDTO> test = customerService.findCustomers();
 
         for (int i = 0; i < test.size(); i++){
             System.out.println(test.get(i).customer_Name());
@@ -27,7 +27,7 @@ public class HomeController {
         System.out.println("------------------------------------");
          for (CustomerDTO p : customerService.findCustomers()){
            System.out.println(p.customer_Name());
-        }
+        }*/
 
         return "index";
     }
