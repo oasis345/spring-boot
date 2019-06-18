@@ -19,6 +19,14 @@
         )
     </insert>
 
+    <select id="login" resultType="com.bitcamp.web.domain.CustomerDTO" parameterType="String">
+        SELECT * FROM CUSTOMERS WHERE CUSTOMER_ID LIKE #{customer_Id} and PASSWORD LIKE #{password}
+    </select>
+
+    <select id="count" resultType="int">
+        SELECT COUNT(*) FROM CUSTOMERS
+    </select>
+
     <select id="selectCustomers" resultType="com.bitcamp.web.domain.CustomerDTO">
         SELECT * FROM CUSTOMERS
     </select>
@@ -29,11 +37,6 @@
 
     <select id="selectCustomerByCustomerId" parameterType="string" resultType="com.bitcamp.web.domain.CustomerDTO">
         SELECT * FROM CUSTOMERS WHERE CUSTOMER_ID = #{customer_Id}
-    </select>
-    <select id="login" parameterType="com.bitcamp.web.domain.CustomerDTO" resultType="com.bitcamp.web.domain.CustomerDTO">
-        SELECT * FROM CUSTOMERS
-         WHERE CUSTOMER_ID LIKE #{customer_Id}
-          and PASSWORD LIKE #{password}
     </select>
 
     <update id="updateCustomer" parameterType="com.bitcamp.web.domain.CustomerDTO">
@@ -52,9 +55,5 @@
     <delete id="deleteCustomer" parameterType="string">
         DELETE FROM CUSTOMERS WHERE CUSTOMER_ID = #{customer_Id}
     </delete>
-
-    <select id="countAll" resultType="int">
-    select count(*) as count from CUSTOMERS
-  </select>
 
 </mapper>

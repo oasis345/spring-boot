@@ -13,11 +13,14 @@ import org.springframework.stereotype.Service;
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
+    CustomerDTO customer;
+
+    @Autowired
     CustomerMapper customerMapper;
 
     @Override
     public void addCustomer(CustomerDTO customer) {
-
+        customerMapper.insertCustomer(customer);
     }
 
     @Override
@@ -46,18 +49,14 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public CustomerDTO login(CustomerDTO customer) {
-        System.out.println("컨틀ㄹ러에서 넘어온 아이디" + customer.getCustomer_Id());
-        System.out.println("컨틀ㄹ러에서 넘어온 아이디" + customer.getPassword());
-    
-        return customerMapper.login(customer); 
-           
-        
+    public CustomerDTO login(String customerId, String password) {
+        customer = customerMapper.login(customerId, password);
+        return customer;
     }
 
     @Override
-    public int countAll() {
-        return customerMapper.countAll();
+    public int count() {
+        return customerMapper.count();
     }
 
 

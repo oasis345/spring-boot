@@ -7,7 +7,5 @@ import lombok.Data;
 
 @Data @Component @Lazy
 public class ShipperDTO {
-    private String shipper_Id;
-    private String pshipper_Name;
-    private String phone;
+    private String shipper_Id, pshipper_Name, phone;
 }

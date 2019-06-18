@@ -7,6 +7,8 @@ import lombok.Data;
 
 @Data @Component @Lazy
 public class CustomerDTO {
-    private String customer_Id,customer_Name,password,ssn,phone,city,address,postalcode,photo;
+    private String customer_Id, customer_Name, password, ssn,
+    phone, city, address, postalcode, photo;
+
 
 }
