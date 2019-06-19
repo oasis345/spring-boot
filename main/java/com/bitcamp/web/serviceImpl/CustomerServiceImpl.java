@@ -40,12 +40,13 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void updateCustomer(CustomerDTO customer) {
-
+        customerMapper.updateCustomer(customer);
+       
     }
 
     @Override
-    public void deleteCustomer(String customerId) {
-
+    public void deleteCustomer(CustomerDTO customer) {
+        customerMapper.updateCustomer(customer);
     }
 
     @Override

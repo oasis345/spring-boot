@@ -1,22 +1,51 @@
+
+    /* 레스트풀방식 이개념을 무조껀 외워야한다.
+        crud를 쓸려면 
+        예를들어 커스터머 정보 가져오려면 
+        1번 AutoWire CustomerService customerService;
+        2번 Autowire CustomerDTO customerDTO;
+
+        3번
+        CRUD에서
+        @postMapping("") 포스트는 안에가 비어있다. 당연히 회원가입을 하니까.
+        @GetMapping("/customerId)") 무조껀 DTO를 넣는다
+        @PutMmaping("/customerId") 무조껀 HashMAP
+        @deleteMapping("/customerId") 무조껀 HashMAP
+
+        기본 로직
+
+
+    */
+
+
+
 package com.bitcamp.web.controller;
 
 import java.util.HashMap;
+
+import javax.print.DocFlavor.STRING;
 
 import com.bitcamp.web.domain.CustomerDTO;
 import com.bitcamp.web.service.CustomerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 @RestController
 @RequestMapping(value="/customers")
 public class CustomerController {
     @Autowired CustomerDTO customer; //@componant를해야 오토와이어드가먹음
+    @Autowired CustomerService customerService; // 자동으로 자신의 타입을 찾아서 의존성을 주입함
 
     // @RequestMapping("/count")
     //     public String count() {
@@ -26,9 +55,14 @@ public class CustomerController {
     //     System.out.println("고객의 총 인원 + "+count );
     //     return count+"";
   
-    @Autowired CustomerService customerService; // 자동으로 자신의 타입을 찾아서 의존성을 주입함
+    
 
-    @RequestMapping("/{customer_Id}/{password}")
+
+    @GetMapping("/count")
+    public String count(){
+        return customerService.count() + "";
+    }
+
         //중괄호안 값이 바뀐다는 뜻 login쪽은 고정 안에값은index에서 가져온것.
         // 앞으로는 public CustomerDTO로 다 리턴한다
         //아래 반납은 index로 넘길떄 객체로 넘기는것이 DTO이다
@@ -41,17 +75,17 @@ public class CustomerController {
         //     customer.setCustomer_Id(id);
         //     customer.setPassword(pass);
         //    return (customerService.login(customer)==null)?"실패":"성공";
+    
+
+    @GetMapping("/{customer_Id}/{password}")
     public CustomerDTO login(@PathVariable("customer_Id")String customer_Id,
                             @PathVariable("password")String password) { // PathVariadble -> URI에 받아온 데이터를 파라미터로 가져옴
-        return customerService.login(customer_Id, password);
+            System.out.println(customer_Id);
+            return customerService.login(customer_Id, password);
     }
 
-    @RequestMapping("/count")
-    public String count(){
-        return customerService.count() + "";
-    }
-
-    @RequestMapping(value="/join", method=RequestMethod.POST)
+    //@RequestMapping(value="/join", method=RequestMethod.POST) 아래 메핑과 == 같다
+    @PostMapping("/join")
     public HashMap<?, ?> requestMethodName(@RequestBody CustomerDTO param) { // JSON을 DTO 필드명에 맞춰서 알아서 값이 들어감
         HashMap<String, Object> map = new HashMap<>();
         System.out.println(param.toString());
@@ -59,7 +93,37 @@ public class CustomerController {
         map.clear();
         map.put("result", "SUCCESS");
         return map;
+
     }
+
+    @GetMapping("/{customer_Id}")
+    public  CustomerDTO getCustomer() {
+        return customer;
+        
+    }
+ 
+
+    @PutMapping("/update")  //딜리트와 없데이트는 그냥 수정햇다고 말을 보내주기만해도되서 해시맵을씀
+    public HashMap<?,?> PutCustomer(@RequestBody CustomerDTO param) {
+        HashMap<String,Object> map= new HashMap<>();
+        customerService.updateCustomer(param);
+        map.clear();
+        map.put("result","SUCCESS");
+        return map;
+    }
+
+    @DeleteMapping("/{customer_Id}")
+    public HashMap<?,?> DeleteCustomer(@RequestBody CustomerDTO param) {
+        HashMap<String,Object> map = new HashMap<>();
+        customerService.deleteCustomer(param);
+        map.clear();
+        map.put("result","SUCCESS");
+        return map;
+    } 
+
+
+
+    
     
     
 }

@@ -14,7 +14,7 @@ public interface CustomerService {
     public List<CustomerDTO> findCustomersByOption(String customerName);
     public CustomerDTO findCustomerByCustomerId(String customerId);
     public void updateCustomer(CustomerDTO customer);
-    public void deleteCustomer(String customerId);
+    public void deleteCustomer(CustomerDTO customer);
     public CustomerDTO login(String customerId, String password);
     public int count();
 }
