@@ -16,7 +16,7 @@ public interface CustomerMapper {
     public List<CustomerDTO> selectCustomersByOption(String customer_Name);
     public CustomerDTO selectCustomerByCustomerId(String customer_Id);
     public void updateCustomer(CustomerDTO customer);
-    public void deleteCustomer(CustomerDTO customer);
+    public void deleteCustomer(String customer_Id);
     public CustomerDTO login(String customer_Id, String password);
     public int count();
 }

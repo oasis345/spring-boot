@@ -6,7 +6,9 @@ var app =  {
     login_form : login_form,
     mypage : mypage,
     join_form : join_form,
-    Update : Update
+    Update : Update,
+    deleteinfo : deleteinfo
+
 };
 
 function init() {
@@ -56,6 +58,16 @@ function init() {
                                         cancle_btn.addEventListener('click', () => {
                                             app.init();
                                         });
+                                        
+                                        let delete_btn = document.getElementById('delete_btn');
+                                                                    delete_btn.addEventListener('click', ()=>{
+                                                                        if (confirm("정말 삭제하시겠습니다??") == true)
+                                                                        {
+                                                                            app.deleteinfo(result);
+                                                                        }else{
+                                                                            app.init();
+                                                                        } 
+                                                                    }); 
 
                                         let update_btn = document.getElementById('update_btn');
                                         update_btn.addEventListener('click', () => {
@@ -77,6 +89,8 @@ function init() {
                                                                         app.Update();
                                                                         app.init();
                                                                     });
+
+                                                                    
                                                                     
                                                                       });
                                                       
@@ -100,6 +114,8 @@ function init() {
 };
 
 
+
+
 function join() {
 
     let data = { // 직접 JSON 타입으로 자바스크립트 객체를 만듬
@@ -117,14 +133,14 @@ function join() {
     xhr.onload = () => {
         if (xhr.readyState == 4 && xhr.status == 200){
             let d = JSON.parse(xhr.responseText);
-                
+            alert(d);
             if (d.result === 'SUCCESS'){
                 alert('회원가입 축하드립니다!' + d.result);
             } else {
                 alert('회원가입 실패 ㅋㅋ');
             }
         } else {
-            alert('AJAX 실패');
+            alert('회원가입 실패!');
         }
     }
     xhr.open('POST','customers/join', true);
@@ -159,10 +175,8 @@ function mypage(result) {
             '주소 : ' + result.address + '<br>' +
             '전화번호 : ' + result.phone + '<br>' +
             ' <input type="button" value="회원정보수정" name="update_btn" id="update_btn">' +
-            ' <input type="button" value="취소" name="cancle" id="cancle_btn">' ;
-            
-
-        
+            ' <input type="button" value="취소" name="cancle" id="cancle_btn">' +
+            ' <input type="button" value="회원삭제" id="delete_btn">'
           
 };
 
@@ -193,7 +207,7 @@ function join_form() {
     let join_ok = document.getElementById('join_ok');
     join_ok.addEventListener('click', () => {
         app.join();
-        alert('가입 성공!');
+        alert('로그인 창으로 돌아갑니다.!');
         app.init();
     })
 };
@@ -207,7 +221,7 @@ function Update(){
         password : document.getElementById('update_pass').value,
         ssn : document.getElementById('update_ssn').value,
         phone : document.getElementById('update_phone').value,
-        city : document.getElementById('update_address').value,
+        city : document.getElementById('update_city').value,
         address : document.getElementById('update_address').value,
         photo : document.getElementById('update_photo').value,
         postalcode : document.getElementById('update_post').value
@@ -233,37 +247,87 @@ function Update(){
 };
 
 /*
-function join() {
-
-    let data = { // 직접 JSON 타입으로 자바스크립트 객체를 만듬
-        customer_Id : document.getElementById('create_id').value,
-        password : document.getElementById('create_pass').value,
-        customer_Name : document.getElementById('create_name').value,
-        ssn : document.getElementById('create_ssn').value,
-        phone : document.getElementById('create_phone').value,
-        city : document.getElementById('create_city').value,
-        address : document.getElementById('create_address').value,
-        postalcode : document.getElementById('create_postalcode').value
-    }
-
-    let xhr = new XMLHttpRequest();
-    xhr.onload = () => {
-        if (xhr.readyState == 4 && xhr.status == 200){
-            let d = JSON.parse(xhr.responseText);
-                
-            if (d.result === 'SUCCESS'){
-                alert('회원가입 축하드립니다!' + d.result);
-            } else {
-                alert('회원가입 실패 ㅋㅋ');
-            }
-        } else {
-            alert('AJAX 실패');
+function admin_login(){
+    let isAdmin = confirm("관리자입니까?");
+    if(isAdmin){
+        let pass = prompt("관리자 번호를 입력하세요");
+        if(pass == 1000){
+            employee.customer_list();
+        }else{
+            alert('입력한 번호가 틀립니다.');
         }
     }
-    xhr.open('POST','customers/join', true);
-    xhr.setRequestHeader('Content-type','application/json;charset=UTF-8'); // 자바한테 JSON을 보내줄때 무적권 적어줌
-    xhr.send(JSON.stringify(data)); // 자바스크립트 객체를 JSON으로 바꿔줌
+    else{
+        alert('관리자 번호가 아닙니다.');
+    }
+};
+
+*/ 
+//xhr.open('GET', 'customers/' + id + '/' + pass, true);
+
+
+function deleteinfo(result)
+{   
+  
+    let xhr = new XMLHttpRequest();
+    xhr.open('delete','customers/' + result.customer_Id + '/',true);
+    xhr.onload = () =>{
+        if(xhr.readyState == 4 && xhr.status == 200){
+            alert('삭제 성공');
+        }
+        else{
+            alert('삭제 실패');
+        }
+    }
+    xhr.send();
+}
+
+var session = {
+    set_session : set_session,
+    get_session : get_session
+}
+
+function set_session(a, b){
+    sessionStorage.setItem(a, b);
+}
+
+set_session(userid, d.customer_Id);
+
+// get_session = userid : as
+// get_session = username : 토마스
+
+
+// let userid = {
+//     name : userid,
+//     value : d.customer_Id
+// }
+
+// let username ={
+//     name : username,
+//     value : d.customer_Name
+// }
+
+// session.set_session(x);
+
+
+function get_session(x){
+    return sessionStorage.getItem(x.name);
+}
+
+
+    
+
+
+/*
+function count() {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', 'customers/count', true);
+    xhr.onload=()=>{
+        if(xhr.readyState===4 && xhr.status === 200){
+            let wrapper = document.querySelector('#wrapper');
+            wrapper.innerHTML = '총 고객수 : <h1>'+xhr.responseText+'</h1>'
+        }
+    }
+    xhr.send();
 };
 */
-
-

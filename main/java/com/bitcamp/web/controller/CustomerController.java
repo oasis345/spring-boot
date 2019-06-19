@@ -1,27 +1,27 @@
 
-    /* 레스트풀방식 이개념을 무조껀 외워야한다.
-        crud를 쓸려면 
-        예를들어 커스터머 정보 가져오려면 
-        1번 AutoWire CustomerService customerService;
-        2번 Autowire CustomerDTO customerDTO;
+/* 레스트풀방식 이개념을 무조껀 외워야한다.
+    crud를 쓸려면 
+    예를들어 커스터머 정보 가져오려면 
+    1번 AutoWire CustomerService customerService;
+    2번 Autowire CustomerDTO customerDTO;
 
-        3번
-        CRUD에서
-        @postMapping("") 포스트는 안에가 비어있다. 당연히 회원가입을 하니까.
-        @GetMapping("/customerId)") 무조껀 DTO를 넣는다
-        @PutMmaping("/customerId") 무조껀 HashMAP
-        @deleteMapping("/customerId") 무조껀 HashMAP
+    3번
+    CRUD에서
+    @postMapping("") 포스트는 안에가 비어있다. 당연히 회원가입을 하니까.
+    @GetMapping("/customerId)") 무조껀 DTO를 넣는다
+    @PutMmaping("/customerId") 무조껀 HashMAP
+    @deleteMapping("/customerId") 무조껀 HashMAP
 
-        기본 로직
-
-
-    */
+    기본 로직
 
 
+*/
 
 package com.bitcamp.web.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.print.DocFlavor.STRING;
 
@@ -85,6 +85,7 @@ public class CustomerController {
     }
 
     //@RequestMapping(value="/join", method=RequestMethod.POST) 아래 메핑과 == 같다
+    // xhr.open('POST','customers/join', true);
     @PostMapping("/join")
     public HashMap<?, ?> requestMethodName(@RequestBody CustomerDTO param) { // JSON을 DTO 필드명에 맞춰서 알아서 값이 들어감
         HashMap<String, Object> map = new HashMap<>();
@@ -96,12 +97,6 @@ public class CustomerController {
 
     }
 
-    @GetMapping("/{customer_Id}")
-    public  CustomerDTO getCustomer() {
-        return customer;
-        
-    }
- 
 
     @PutMapping("/update")  //딜리트와 없데이트는 그냥 수정햇다고 말을 보내주기만해도되서 해시맵을씀
     public HashMap<?,?> PutCustomer(@RequestBody CustomerDTO param) {
@@ -113,13 +108,31 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{customer_Id}")
-    public HashMap<?,?> DeleteCustomer(@RequestBody CustomerDTO param) {
+    public HashMap<?,?> DeleteCustomer(@PathVariable("customer_Id")String customer_Id) {
         HashMap<String,Object> map = new HashMap<>();
-        customerService.deleteCustomer(param);
+        customerService.deleteCustomer(customer_Id);
         map.clear();
-        map.put("result","SUCCESS");
+        map.put("result","탈퇴 성공");
         return map;
     } 
+
+    @GetMapping("")
+    public List<CustomerDTO> list(){
+        List<CustomerDTO> list = new ArrayList<>();
+        list = customerService.findCustomers();
+        for(CustomerDTO customer : list){
+            System.out.println(customer.getCustomer_Id()+" : "
+            +customer.getCustomer_Name()+" : "
+            +customer.getPassword()+" : "
+            +customer.getSsn()+" : "
+            +customer.getPhone()+" : "
+            +customer.getCity()+" : "
+            +customer.getAddress()+" : "
+            +customer.getPostalcode());
+        }
+        
+        return list;
+    }
 
 
 

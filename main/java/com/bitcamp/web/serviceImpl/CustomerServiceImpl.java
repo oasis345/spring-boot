@@ -20,7 +20,10 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void addCustomer(CustomerDTO customer) {
-        customerMapper.insertCustomer(customer);
+       
+            customerMapper.insertCustomer(customer);
+       
+        
     }
 
     @Override
@@ -43,12 +46,12 @@ public class CustomerServiceImpl implements CustomerService {
         customerMapper.updateCustomer(customer);
        
     }
-
     @Override
-    public void deleteCustomer(CustomerDTO customer) {
-        customerMapper.updateCustomer(customer);
+    public void deleteCustomer(String customer_Id) {
+        customerMapper.deleteCustomer(customer_Id);
     }
 
+    
     @Override
     public CustomerDTO login(String customerId, String password) {
         customer = customerMapper.login(customerId, password);
@@ -59,6 +62,8 @@ public class CustomerServiceImpl implements CustomerService {
     public int count() {
         return customerMapper.count();
     }
+
+  
 
 
 }
