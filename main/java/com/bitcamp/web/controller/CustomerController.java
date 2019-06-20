@@ -23,10 +23,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.print.DocFlavor.STRING;
 
 import com.bitcamp.web.domain.CustomerDTO;
 import com.bitcamp.web.service.CustomerService;
+import com.bitcamp.web.common.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,7 +35,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
@@ -44,7 +43,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RestController
 @RequestMapping(value="/customers")
 public class CustomerController {
-    @Autowired CustomerDTO customer; //@componant를해야 오토와이어드가먹음
+    @Autowired Printer p;
+    @Autowired CustomerDTO customer; //Service 쪽에 @componant를해야 오토와이어드가먹음
     @Autowired CustomerService customerService; // 자동으로 자신의 타입을 찾아서 의존성을 주입함
 
     // @RequestMapping("/count")
@@ -54,12 +54,15 @@ public class CustomerController {
         
     //     System.out.println("고객의 총 인원 + "+count );
     //     return count+"";
-  
-    
 
+  
 
     @GetMapping("/count")
     public String count(){
+        int count = customerService.count();
+        
+        
+        p.accept("람다가 출력한 고객의 총인원" + count);
         return customerService.count() + "";
     }
 
@@ -116,9 +119,9 @@ public class CustomerController {
         return map;
     } 
 
-    @GetMapping("")
+    @GetMapping("/list")
     public List<CustomerDTO> list(){
-        List<CustomerDTO> list = new ArrayList<>();
+        /* List<CustomerDTO> list = new ArrayList<>();
         list = customerService.findCustomers();
         for(CustomerDTO customer : list){
             System.out.println(customer.getCustomer_Id()+" : "
@@ -129,9 +132,8 @@ public class CustomerController {
             +customer.getCity()+" : "
             +customer.getAddress()+" : "
             +customer.getPostalcode());
-        }
-        
-        return list;
+        } */
+        return null;
     }
 
 

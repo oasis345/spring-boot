@@ -23,13 +23,21 @@
         SELECT * FROM CUSTOMERS WHERE CUSTOMER_ID LIKE #{customer_Id} and PASSWORD LIKE #{password}
     </select>
 
-    <select id="count" resultType="int">
+     <select id="count" resultType="int">
         SELECT COUNT(*) FROM CUSTOMERS
-    </select>
+    </select> 
+    
+    <select id="selectCustomers" resultMap="com.bitcamp.web.domain.CustomerDTO" parameterType="com.bitcamp.web.common.util.PageProxy">
+        SELECT @ROWNUM:=@ROWNUM+1 AS rownum,
+            C.*
+        FROM CUSTOMERS C, (SELECT @ROWNUM:=0)TMP
+        ORDER BY rownum DESC
+        LIMIT #{startRow}, #{pageSize}
+    </select> 
 
-    <select id="selectCustomers" resultType="com.bitcamp.web.domain.CustomerDTO">
+     <!--  <select id="selectCustomers" resultType="com.bitcamp.web.domain.CustomerDTO">
         SELECT * FROM CUSTOMERS
-    </select>
+    </select>   -->
 
     <select id="selectCustomersByOption" parameterType="string" resultType="com.bitcamp.web.domain.CustomerDTO">
         SELECT * FROM CUSTOMERS WHERE CUSTOMER_NAME = #{customer_Name}

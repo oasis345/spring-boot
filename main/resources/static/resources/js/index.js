@@ -7,9 +7,28 @@ var app =  {
     mypage : mypage,
     join_form : join_form,
     Update : Update,
+    Updateform,Updateform,
     deleteinfo : deleteinfo
 
 };
+
+var employee ={
+    customer_list : customer_list,
+    admin_login : admin_login,
+    customer_list_form : customer_list_form
+}
+
+var session = {
+    set_value : set_value,
+    get_value : get_value
+};
+function set_value(x){
+    sessionStorage.setItem(x.name,x.value);
+}
+function get_value(x){
+    return sessionStorage.getItem(x);
+}
+
 
 function init() {
     $wrapper.innerHTML = app.login_form();
@@ -20,6 +39,13 @@ function init() {
 
     join.addEventListener('click', () => {
         app.join_form();
+    });
+
+    document.getElementById('admin-btn')
+    .addEventListener('click',e=>{
+        e.preventDefault();
+        alert('관리자 버튼 클릭');
+        employee.admin_login();
     });
 
     
@@ -33,24 +59,11 @@ function init() {
             if (id != "" && pass != ""){ // 아무것도 입력 안하고 로그인 버튼을 눌렀을 때
 
                 let xhr = new XMLHttpRequest();
-
                 xhr.onload = () => { //콜백함수 대기중이다가 상태변화가 생기면 안에 값을 실행함 
                     if(xhr.readyState == 4 && xhr.status == 200){
                         if (xhr.responseText){ // 값만 넣어도 true 인지 false 인지 검사함
-                        console.dir(xhr.responseText); // JSON 문자열을 받음
-                        let result = JSON.parse(xhr.responseText); // JSON 문자열을 자바스크립트 객체로 만들어줌
-
-                        // let result = {
-                        //                 "customer_Id":"choi",
-                        //                 "customer_Name":"테스트",
-                        //                 "password":"1234",
-                        //                 "ssn":"123",
-                        //                 "phone":"123",
-                        //                 "city":"123",
-                        //                 "address":"23",
-                        //                 "postalcode":"123123",
-                        //                 "photo":null
-                        //             }
+                            console.dir(xhr.responseText); // JSON 문자열을 받음
+                            let result = JSON.parse(xhr.responseText); // JSON 문자열을 자바스크립트 객체로 만들어줌
 
                         $wrapper.innerHTML = app.mypage(result);
 
@@ -71,6 +84,8 @@ function init() {
 
                                         let update_btn = document.getElementById('update_btn');
                                         update_btn.addEventListener('click', () => {
+                                            app.Updateform();
+                                            
                                             $wrapper.innerHTML =    '<h1>마이 페이지</h1>' +
                                                                     '아이디 : <input type = "text" value ="' +  result.customer_Id + '" id ="update_id" readonly> <br>' + 
                                                                     '이름 : <input type = "text" value ="' +  result.customer_Name + '" id ="update_name"> <br>' + 
@@ -163,8 +178,9 @@ function count() {
 function login_form() {
     return 'ID : <input type="text" id="id"><br>'
             + 'PASS : <input type="password" id="pass"><br>'
-            + '<input type="submit" value="로그인" name="login" id="login-btn">'
+            + ' <input type="submit" value="로그인" name="login" id="login-btn">'
             + ' <input type="button" value="가입" name="join" id="join">'
+            + ' <input type="button" value="관리자" id="admin-btn">';
 
 }
 
@@ -246,24 +262,6 @@ function Update(){
     xhr.send(JSON.stringify(data));
 };
 
-/*
-function admin_login(){
-    let isAdmin = confirm("관리자입니까?");
-    if(isAdmin){
-        let pass = prompt("관리자 번호를 입력하세요");
-        if(pass == 1000){
-            employee.customer_list();
-        }else{
-            alert('입력한 번호가 틀립니다.');
-        }
-    }
-    else{
-        alert('관리자 번호가 아닙니다.');
-    }
-};
-
-*/ 
-//xhr.open('GET', 'customers/' + id + '/' + pass, true);
 
 
 function deleteinfo(result)
@@ -282,6 +280,90 @@ function deleteinfo(result)
     xhr.send();
 }
 
+
+function admin_login(){
+    let isAdmin = confirm("관리자입니까?");
+    if(isAdmin){
+        let pass = prompt("관리자 번호를 입력하세요");
+        if(pass == 1000){
+            employee.customer_list();
+        }else{
+            alert('입력한 번호가 틀립니다.');
+        }
+    }
+    else{
+        alert('관리자 번호가 아닙니다.');
+    }
+};
+
+
+function customer_list(){
+    let xhr = new XMLHttpRequest();
+
+    xhr.onload = () => {
+        if (xhr.readyState == 4 && xhr.status == 200){
+            // let d = JSON.parse(xhr.responseText);
+            $wrapper.innerHTML = employee.customer_list_form();
+            let tbody = document.getElementById('tbody');
+            let i = 0;
+            let rows = '';
+
+            for (; i < 5; i++){
+                rows +=
+                    '<tr>' +
+                        '<td>' + i + '</td>' + 
+                        '<td>' + i + '</td>' + 
+                        '<td>' + i + '</td>' + 
+                        '<td>' + i + '</td>' + 
+                        '<td>' + i + '</td>' + 
+                    '</tr>';
+            }
+            
+
+            tbody.innerHTML = rows;
+            // var list_print = '';
+            
+            // for (let i = 0; i < d.length; i++){
+            //     list_print += '<div style="margin-left:40%;">' +
+            //     '<div> ID : ' + d[i].customer_Id + '</div>' +
+            //     '<div> NAME : ' + d[i].customer_Name + '</div>' +
+            //     '<div> PHONE : ' + d[i].phone + '</div>' + 
+            //     '<div> CITY : ' + d[i].city + '</div>' +
+            //     '<div> ADDRESS : ' + d[i].address + '</div><br><br></div>';
+            // }
+
+            // $wrapper.innerHTML = list_print;
+        } else {
+            alert('AJAX 실패');
+        }
+    }
+    xhr.open('GET', 'customers/list', true);
+    xhr.send();
+}
+  
+
+
+function Updateform(){
+    app.Updateform();
+    
+}
+
+function customer_list_form() {
+    return 	'<h2>고객 목록</h2>'
+    + '<table>'
+      + '<tr>'
+        + '<th>아이디</th>'
+        + '<th>고객명</th>'
+        + '<th>주민번호</th>'
+       + '<th>전화번호</th>'
+       + '<th>도시</th>'
+      + '</tr>'
+        + '<tbody id="tbody">'
+        + '</tbody>'
+    + '</table>';
+};
+
+/* 
 var session = {
     set_session : set_session,
     get_session : get_session
@@ -296,7 +378,6 @@ set_session(userid, d.customer_Id);
 // get_session = userid : as
 // get_session = username : 토마스
 
-
 // let userid = {
 //     name : userid,
 //     value : d.customer_Id
@@ -308,26 +389,6 @@ set_session(userid, d.customer_Id);
 // }
 
 // session.set_session(x);
-
-
-function get_session(x){
-    return sessionStorage.getItem(x.name);
-}
-
-
-    
-
-
-/*
-function count() {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'customers/count', true);
-    xhr.onload=()=>{
-        if(xhr.readyState===4 && xhr.status === 200){
-            let wrapper = document.querySelector('#wrapper');
-            wrapper.innerHTML = '총 고객수 : <h1>'+xhr.responseText+'</h1>'
-        }
-    }
-    xhr.send();
-};
 */
+
+

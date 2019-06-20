@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class HomeController {
 
-    @Autowired
-    CustomerService customerService;
-    
+    @Autowired CustomerService customerService;
+
     @RequestMapping("/")
     public String index() {
         return "index";
     }
+
+    
 
 }
